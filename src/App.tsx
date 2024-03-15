@@ -1,16 +1,18 @@
-import React, { useContext } from 'react';
-import { ThemeContext } from './ThemeContext';
-import './index'; 
+import React, { useContext } from "react";
+import { ThemeContext } from "./components/theme/ThemeContext";
+import Header from "components/common/Header";
+import Footer from "components/common/Footer";
+import ThemeWrapper from "./components/theme/ThemeWrapper"; 
 
 const App: React.FC = () => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
+  const { toggleTheme } = useContext(ThemeContext);
 
   return (
-    <div className={`${theme === 'light' ? 'light-theme' : 'dark-theme'}`}>
-      {/* Your component content */}
-      TEST
-      <button onClick={toggleTheme}>Toggle Theme</button> 
-    </div>
+    <ThemeWrapper> 
+      <Header />
+      <button onClick={toggleTheme}>Toggle Theme</button>
+      <Footer />
+    </ThemeWrapper> 
   );
 };
 
