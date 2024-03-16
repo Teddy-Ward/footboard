@@ -12,7 +12,7 @@ const Footer: React.FC<FooterProps> = ({ theme, toggleTheme }) => {
         href="https://tedward.net"
         target="_blank"
         rel="noreferrer"
-        className="tedlink"
+        className="ted-link"
       >
         Design by TedWard
       </a>

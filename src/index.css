@@ -1,5 +1,5 @@
 :root {
-  --light-main-bg: white; 
+  --light-main-bg: white;
   --dark-main-bg: #222222; /* Dark theme background color */
 }
 
@@ -76,7 +76,7 @@ body {
 }
 
 /* FOOTER */
-.tedlink {
+.ted-link {
   position: absolute;
   right: 0.6rem;
   bottom: 0.6rem;
@@ -98,13 +98,38 @@ body {
 
 /* MAIN */
 .main-content {
-  height: 80vh; 
-  width: 80%; 
-  margin: 0 auto; 
+  display: grid;
+  place-items: center;
+  height: 80vh;
+  width: 80%;
+  max-width: 1000px;
+  margin: 0 auto;
   background-color: aqua;
+  overflow-y: auto;
+  align-items: center;
 }
 
 .dark-theme .main-content {
-  background-color: var(--light-main-bg); 
+  background-color: var(--light-main-bg);
   color: black;
+}
+
+.team-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.team-card {
+  border: 1px solid #ccc;
+  padding: 15px;
+  text-align: center;
+  width: 200px;
+  height: 150px;
+  margin: 5px;
+}
+
+.team-card img {
+  width: 50px;
 }
