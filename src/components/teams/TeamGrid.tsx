@@ -1,6 +1,7 @@
 import React from 'react';
 import TeamCard from './TeamCard';
 
+
 interface TeamData {
   idTeam: string;
   strTeam: string;
@@ -11,9 +12,10 @@ interface TeamGridProps {
   data: TeamData[];
   isLoading: boolean;
   error: string | null;
+  onSelect: (teamName: string) => void;
 }
 
-const TeamGrid: React.FC<TeamGridProps> = ({ data, isLoading, error }) => {
+const TeamGrid: React.FC<TeamGridProps> = ({ data, isLoading, error, onSelect }) => {
   return (
     <div className="team-card-container">
       {isLoading ? (
@@ -22,7 +24,7 @@ const TeamGrid: React.FC<TeamGridProps> = ({ data, isLoading, error }) => {
         <p>Error: {error}</p>
       ) : (
         data.map((team) => (
-          <TeamCard key={team.idTeam} team={team} /> 
+          <TeamCard key={team.idTeam} team={team} onSelect={onSelect} />
         ))
       )}
     </div>
