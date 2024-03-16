@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import fetchTeamData from "utils/fetchTeamData";
-import TeamCard from "components/teams/TeamCard";
+import TeamGrid from "components/teams/TeamGrid";
 
 interface TeamData {
   idTeam: string;
@@ -30,17 +30,9 @@ const Main: React.FC = () => {
 
   return (
     <main className="main-content">
-      {isLoading ? (
-        <p>Loading data...</p>
-      ) : error ? (
-        <p>Error: {error}</p>
-      ) : (
-        <div className="team-card-container">
-          {data.map((team) => (
-            <TeamCard key={team.idTeam} team={team} /> // Pass the team data as a prop
-          ))}
-        </div>
-      )}
+      <div className="scrollable-container">
+      <TeamGrid data={data} isLoading={isLoading} error={error} /> 
+      </div>
     </main>
   );
 };

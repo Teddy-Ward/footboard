@@ -7,7 +7,7 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ theme, toggleTheme }) => {
   return (
-    <div>
+    <footer>
       <a
         href="https://tedward.net"
         target="_blank"
@@ -19,7 +19,7 @@ const Footer: React.FC<FooterProps> = ({ theme, toggleTheme }) => {
       <button onClick={toggleTheme} className="theme-toggle">
         Toggle Theme ({theme})
       </button>
-    </div>
+    </footer>
   );
 };
 
