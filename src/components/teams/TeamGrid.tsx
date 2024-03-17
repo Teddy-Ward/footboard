@@ -12,7 +12,7 @@ interface TeamGridProps {
   data: TeamData[];
   isLoading: boolean;
   error: string | null;
-  onSelect: (teamName: string) => void;
+  onSelect: (teamName: string, teamId: string) => void;
 }
 
 const TeamGrid: React.FC<TeamGridProps> = ({ data, isLoading, error, onSelect }) => {
@@ -24,7 +24,7 @@ const TeamGrid: React.FC<TeamGridProps> = ({ data, isLoading, error, onSelect })
         <p>Error: {error}</p>
       ) : (
         data.map((team) => (
-          <TeamCard key={team.idTeam} team={team} onSelect={onSelect} />
+          <TeamCard key={team.idTeam} team={team} teamId={team.idTeam} onSelect={onSelect} />
         ))
       )}
     </div>
