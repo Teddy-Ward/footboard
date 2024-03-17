@@ -10,7 +10,7 @@ interface TeamData {
 }
 
 interface Team {
-  idTeam: string;
+  teamBadge: string;
   strTeam: string;
 }
 
@@ -35,8 +35,8 @@ const Main: React.FC = () => {
       });
   }, []);
 
-  const handleTeamSelect = (teamName: string, teamId: string) => {
-    setSelectedTeam({ strTeam: teamName, idTeam: teamId });
+  const handleTeamSelect = (teamName: string, teamBadge: string) => {
+    setSelectedTeam({ strTeam: teamName, teamBadge: teamBadge });
   };
 
   const handleRemoveSelectedTeam = () => {
@@ -49,7 +49,7 @@ const Main: React.FC = () => {
         <>
           <TeamSquad
             teamName={selectedTeam.strTeam}
-            teamId={selectedTeam.idTeam}
+            teamBadge={selectedTeam.teamBadge}
           />
           <button onClick={() => handleRemoveSelectedTeam()}>
             Remove Selected Team

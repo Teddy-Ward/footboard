@@ -5,10 +5,10 @@ import { Player } from "./PlayerTypes";
 
 interface TeamSquadProps {
   teamName: string;
-  teamId: string;
+  teamBadge: string;
 }
 
-const TeamSquad: React.FC<TeamSquadProps> = ({ teamId, teamName }) => {
+const TeamSquad: React.FC<TeamSquadProps> = ({ teamBadge, teamName }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [squadData, setSquadData] = useState<{ players: Player[] } | null>(
