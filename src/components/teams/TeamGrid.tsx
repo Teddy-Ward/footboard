@@ -1,11 +1,10 @@
-import React from 'react';
-import TeamCard from './TeamCard';
-
+import React from "react";
+import TeamCard from "./TeamCard";
 
 interface TeamData {
   idTeam: string;
   strTeam: string;
-  strTeamBadge: string; 
+  strTeamBadge: string;
 }
 
 interface TeamGridProps {
@@ -15,18 +14,30 @@ interface TeamGridProps {
   onSelect: (teamName: string, teamBadge: string) => void;
 }
 
-const TeamGrid: React.FC<TeamGridProps> = ({ data, isLoading, error, onSelect }) => {
+const TeamGrid: React.FC<TeamGridProps> = ({
+  data,
+  isLoading,
+  error,
+  onSelect,
+}) => {
   return (
-    <div className="team-card-container">
-      {isLoading ? (
-        <p>Loading data...</p>
-      ) : error ? (
-        <p>Error: {error}</p>
-      ) : (
-        data.map((team) => (
-          <TeamCard key={team.idTeam} team={team} teamBadge={team.strTeamBadge} onSelect={onSelect} />
-        ))
-      )}
+    <div className="scrollable-container">
+      <div className="team-card-container">
+        {isLoading ? (
+          <p>Loading data...</p>
+        ) : error ? (
+          <p>Error: {error}</p>
+        ) : (
+          data.map((team) => (
+            <TeamCard
+              key={team.idTeam}
+              team={team}
+              teamBadge={team.strTeamBadge}
+              onSelect={onSelect}
+            />
+          ))
+        )}
+      </div>{" "}
     </div>
   );
 };

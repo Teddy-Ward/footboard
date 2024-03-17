@@ -11,14 +11,14 @@ interface TeamData {
 
 interface Team {
   idTeam: string;
-  strTeam: string; 
+  strTeam: string;
 }
 
 const Main: React.FC = () => {
   const [data, setData] = useState<TeamData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [selectedTeam, setSelectedTeam] = useState<Team | null>(null); 
+  const [selectedTeam, setSelectedTeam] = useState<Team | null>(null);
 
   useEffect(() => {
     setIsLoading(true);
@@ -36,15 +36,33 @@ const Main: React.FC = () => {
   }, []);
 
   const handleTeamSelect = (teamName: string, teamId: string) => {
-    setSelectedTeam({ strTeam: teamName, idTeam: teamId }); 
+    setSelectedTeam({ strTeam: teamName, idTeam: teamId });
+  };
+
+  const handleRemoveSelectedTeam = () => {
+    setSelectedTeam(null);
   };
 
   return (
     <main className="main-content">
-      <div className="scrollable-container">
-      <TeamGrid data={data} isLoading={isLoading} error={error}  onSelect={handleTeamSelect}  /> 
-      {selectedTeam && <TeamSquad teamName={selectedTeam.strTeam} teamId={selectedTeam.idTeam} />}
-      </div>
+      {selectedTeam ? (
+        <>
+          <TeamSquad
+            teamName={selectedTeam.strTeam}
+            teamId={selectedTeam.idTeam}
+          />
+          <button onClick={() => handleRemoveSelectedTeam()}>
+            Remove Selected Team
+          </button>
+        </>
+      ) : (
+        <TeamGrid
+          data={data}
+          isLoading={isLoading}
+          error={error}
+          onSelect={handleTeamSelect}
+        />
+      )}
     </main>
   );
 };
