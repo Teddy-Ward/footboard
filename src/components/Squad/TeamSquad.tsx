@@ -16,6 +16,7 @@ const TeamSquad: React.FC<TeamSquadProps> = ({ teamBadge, teamName }) => {
   );
   const [showPlayerModal, setShowPlayerModal] = useState(false);
   const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(null);
+  const [manager, setManager] = useState<Player | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,6 +24,21 @@ const TeamSquad: React.FC<TeamSquadProps> = ({ teamBadge, teamName }) => {
       try {
         const data = await fetchSquadData(teamName);
         setSquadData(data);
+        console.log(data);
+        if (data.players) {
+          const manager = data.players.find(
+            (player) => player.strPosition === "Manager"
+          );
+          const otherPlayers = data.players.filter(
+            (player) => player.strPosition !== "Manager"
+          );
+          if (manager) {
+            setSquadData({ players: otherPlayers });
+            setManager(manager || null);
+          } else {
+            console.log("No manager found in the data.");
+          }
+        }
       } catch (error) {
         console.error("Error fetching squad data:", error);
         setError("Error fetching squad data, please try again");
@@ -40,7 +56,6 @@ const TeamSquad: React.FC<TeamSquadProps> = ({ teamBadge, teamName }) => {
     setShowPlayerModal(true);
   };
 
-  
   return (
     <div>
       <h2>Squad for {teamName}</h2>
@@ -49,19 +64,22 @@ const TeamSquad: React.FC<TeamSquadProps> = ({ teamBadge, teamName }) => {
       ) : error ? (
         <p>Error: {error}</p>
       ) : squadData?.players ? (
-        <ul>
-          {squadData.players.map((player) => (
-            <li key={player.idPlayer}>
-              {player.strPlayer} - #{player.strNumber}{" "}
-              <button
-                className="info-button"
-                onClick={() => handleShow(player)}
-              >
-                ?
-              </button>
-            </li>
-          ))}
-        </ul>
+        <>
+          {manager && <p>Manager: {manager.strPlayer}</p>}
+          <ul>
+            {squadData.players.map((player) => (
+              <li key={player.idPlayer}>
+                {player.strPlayer} - #{player.strNumber}{" "}
+                <button
+                  className="info-button"
+                  onClick={() => handleShow(player)}
+                >
+                  ?
+                </button>
+              </li>
+            ))}
+          </ul>
+        </>
       ) : (
         <p>No squad data found.</p>
       )}
