@@ -8,8 +8,8 @@ interface TeamData {
 
 interface TeamCardProps {
   team: TeamData;
-  teamId: string; 
-  onSelect: (teamName: string, teamId: string) => void;
+  teamBadge: string; 
+  onSelect: (teamName: string, teamBadge: string) => void;
 }
 
 const TeamCard: React.FC<TeamCardProps> = ({ team, onSelect }) => {

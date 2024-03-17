@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import fetchTeamData from "utils/fetchTeamData";
 import TeamGrid from "components/teams/TeamGrid";
-import TeamSquad from "components/teams/TeamSquad";
+import TeamSquad from "components/Squad/TeamSquad";
 
 interface TeamData {
   idTeam: string;

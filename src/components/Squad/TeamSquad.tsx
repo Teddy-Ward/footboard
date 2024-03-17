@@ -1,30 +1,13 @@
 import React, { useState, useEffect } from "react";
 import fetchSquadData from "utils/fetchSquadData";
+import PlayerModal from './PlayerModal';
+import { Player } from './PlayerTypes';
 
 interface TeamSquadProps {
   teamName: string;
   teamId: string;
 }
 
-interface Player {
-  idPlayer: string;
-  strNationality: string;
-  strPlayer: string;
-  strPlayerAlternate: string;
-  strTeam: string;
-  strTeam2: string;
-  dateBorn: string;
-  strNumber: string;
-  strSigning: string;
-  strWage: string;
-  strStatus: string;
-  strDescriptionEN: string;
-  strSide: string;
-  strPosition: string;
-  strHeight: string;
-  strWeight: string;
-  strCutout: string;
-}
 
 const TeamSquad: React.FC<TeamSquadProps> = ({ teamId, teamName }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -32,6 +15,8 @@ const TeamSquad: React.FC<TeamSquadProps> = ({ teamId, teamName }) => {
   const [squadData, setSquadData] = useState<{ players: Player[] } | null>(
     null
   );
+  const [showPlayerModal, setShowPlayerModal] = useState(false);
+  const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,6 +35,13 @@ const TeamSquad: React.FC<TeamSquadProps> = ({ teamId, teamName }) => {
     fetchData();
   }, [teamName]);
 
+
+  const handleClose = () => setShowPlayerModal(false);
+  const handleShow = (player: Player) => {
+    setSelectedPlayer(player);
+    setShowPlayerModal(true); 
+  };
+
   return (
     <div>
       <h2>Squad for {teamName}</h2>
@@ -61,13 +53,22 @@ const TeamSquad: React.FC<TeamSquadProps> = ({ teamId, teamName }) => {
         <ul>
           {squadData.players.map((player) => (
             <li key={player.idPlayer}>
-              {player.strPlayer} - #{player.strNumber}
+              {player.strPlayer} - #{player.strNumber} {" "}
+              <button className="info-button" onClick={() => handleShow(player)}>
+?
+</button>
             </li>
           ))}
         </ul>
       ) : (
         <p>No squad data found.</p>
       )}
+
+<PlayerModal
+        show={showPlayerModal}
+        onClose={handleClose}
+        player={selectedPlayer!} // Ensure selectedPlayer exists
+      />
     </div>
   );
 };
