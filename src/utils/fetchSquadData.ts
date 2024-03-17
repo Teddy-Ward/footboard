@@ -23,7 +23,7 @@ const fetchSquadData = async (
 ): Promise<{ players: Player[] }> => {
   try {
     const response = await fetch(
-      `https://www.thesportsdb.com/api/v1/json/60130162/searchplayers.php?t=${teamName}`
+      `https://www.thesportsdb.com/api/v1/json/${process.env.REACT_APP_SPORTSDB_KEY}/searchplayers.php?t=${teamName}`
     );
 
     if (!response.ok) {
