@@ -57,17 +57,18 @@ const Main: React.FC = () => {
       {selectedTeam ? (
         <>
           <div className="pitch-view">
-            <TeamSquad
-              teamName={selectedTeam.strTeam}
-              teamBadge={selectedTeam.teamBadge}
-              onUpdateSelectedPlayers={handleSquadPlayersUpdate}
-            />
-            <Pitch />
+            <div>
+              <TeamSquad
+                teamName={selectedTeam.strTeam}
+                teamBadge={selectedTeam.teamBadge}
+                onUpdateSelectedPlayers={handleSquadPlayersUpdate}
+              />
+              <button onClick={() => handleRemoveSelectedTeam()}>
+                Remove Selected Team
+              </button>
+            </div>
+            <Pitch squadPlayers={squadPlayers} />
           </div>
-
-          <button onClick={() => handleRemoveSelectedTeam()}>
-            Remove Selected Team
-          </button>
         </>
       ) : (
         <TeamGrid

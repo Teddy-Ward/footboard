@@ -1,13 +1,17 @@
-import React from 'react';
+import React from "react";
+import { Player } from "components/Squad/PlayerTypes";
 
 interface PitchProps {
-  // You might add props for width, height, or other customizations later 
+  squadPlayers: Player[];
 }
 
-const Pitch: React.FC<PitchProps> = () => {
+const Pitch: React.FC<PitchProps> = ({ squadPlayers }) => {
   return (
-    <div className="pitch-container"> 
-      <img src={require('../../assets/images/pitch.svg').default} alt="Football Pitch" />  
+    <div className="pitch-container">
+      <img
+        src={require("../../assets/images/pitch.svg").default}
+        alt="Football Pitch"
+      />
     </div>
   );
 };
