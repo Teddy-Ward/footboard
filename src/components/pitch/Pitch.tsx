@@ -5,20 +5,35 @@ interface PitchProps {
   squadPlayers: Player[];
 }
 
-
 const Pitch: React.FC<PitchProps> = ({ squadPlayers }) => {
   const [selectedFormation, setSelectedFormation] = useState("4-4-2"); // Default
 
   const formations = {
     "4-4-2": [
-      { x: "50%", y: "90%" }, // Goalkeeper
-      { x: "35%", y: "70%" }, // Defender 1
-      { x: "65%", y: "70%" }, // Defender 2
+      { x: "50%", y: "92%" }, // Goalkeeper
+      { x: "80%", y: "82%" }, // Defender 1
+      { x: "60%", y: "82%" }, // Defender 2
+      { x: "40%", y: "82%" }, // Defender 3
+      { x: "20%", y: "82%" }, // Defender 4
+      { x: "80%", y: "68%" }, // Midfielder 1
+      { x: "60%", y: "68%" }, // Midfielder 2
+      { x: "40%", y: "68%" }, // Midfielder 3
+      { x: "20%", y: "68%" }, // Midfielder 4
+      { x: "60%", y: "55%" }, // Forward 1
+      { x: "40%", y: "55%" }, // Forward 2
     ],
     "3-4-3": [
-      { x: "50%", y: "70%" }, // Goalkeeper
-      { x: "35%", y: "70%" }, // Defender 1
-      { x: "65%", y: "70%" }, // Defender 2
+      { x: "50%", y: "92%" }, // Goalkeeper
+      { x: "75%", y: "82%" }, // Defender 1
+      { x: "50%", y: "82%" }, // Defender 2
+      { x: "25%", y: "82%" }, // Defender 3
+      { x: "80%", y: "68%" }, // Midfielder 1
+      { x: "60%", y: "68%" }, // Midfielder 2
+      { x: "40%", y: "68%" }, // Midfielder 3
+      { x: "20%", y: "68%" }, // Midfielder 4
+      { x: "65%", y: "55%" }, // Forward 1
+      { x: "50%", y: "55%" }, // Forward 2
+      { x: "35%", y: "55%" }, // Forward 3
     ],
   };
   return (
@@ -34,24 +49,48 @@ const Pitch: React.FC<PitchProps> = ({ squadPlayers }) => {
         src={require("../../assets/images/pitch.svg").default}
         alt="Football Pitch"
       />
-      {[...Array(3)].map((_, index) => {
-        const circlePosition = formations[selectedFormation as "4-4-2" | "3-4-3"][index];
+      {[...Array(11)].map((_, index) => {
+        const circlePosition =
+          formations[selectedFormation as "4-4-2" | "3-4-3"][index];
+        const player = squadPlayers[index];
 
         return (
-          <img
-            src={require("../../assets/images/red-circle.svg").default}
-            alt="Red Circle"
-            key={index}
-            className="red-circle"
-            style={{
-              position: "absolute",
-              left: circlePosition.x,
-              top: circlePosition.y,
-              transform: `translate(-50%, -50%)`,
-              width: "40px",
-              height: "40px",
-            }}
-          />
+          <>
+          {squadPlayers[index] && (
+            <div
+              key={index}
+              style={{
+                position: "absolute",
+                left: circlePosition.x,
+                top: circlePosition.y,
+              }}
+            >
+              <img
+                src={require("../../assets/images/red-circle.svg").default}
+                alt="Red Circle"
+                className="red-circle"
+                style={{
+                  position: "relative", // Change to relative for text positioning
+                  transform: `translate(-50%, -50%)`,
+                  width: "40px",
+                  height: "40px",
+                }}
+              />
+              {/* Display strNumber within the circle */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  color: "white",
+                }}
+              >
+                {player.strNumber}
+              </div>
+            </div>
+            ) }
+          </>
         );
       })}
     </div>
