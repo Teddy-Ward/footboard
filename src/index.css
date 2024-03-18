@@ -240,3 +240,43 @@ body {
 .info-button:hover {
   background-color: var(--dark-main-bg); /* Slightly darker on hover */
 }
+
+
+
+.pitch-view {
+  display: flex; /* Enable flexbox layout */
+  flex-wrap: wrap; /* Allow items to wrap to the next line if needed */
+  justify-content: space-around; /* Distribute space around items horizontally */
+  align-items: center; /* Align items vertically to the center */
+  height: 100%; /* Make the container fill 100% of the viewport height */
+  width: 100%; /* Make the container fill 100% of the viewport width */
+}
+
+.pitch-view > :first-child { 
+  flex: 0 0 350px; /* Limit width to 300px */
+  margin: 10px;
+}
+
+/* Style for the second component (the Pitch) */
+.pitch-view > :last-child {
+  flex: 1; /* Allow it to fill the remaining space */
+  margin: 10px; 
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) { 
+  .pitch-view {
+    flex-direction: column; /* Stack items vertically on smaller screens */
+  }
+}
+
+.pitch-container {
+  min-width: 500px;
+
+}
+
+.pitch-container img {
+ width: 100%;
+ max-height: 90%;
+ margin: auto;
+}
