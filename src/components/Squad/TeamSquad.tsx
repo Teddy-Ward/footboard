@@ -6,9 +6,10 @@ import { Player } from "./PlayerTypes";
 interface TeamSquadProps {
   teamName: string;
   teamBadge: string;
+  onUpdateSelectedPlayers: (selectedPlayers: Player[]) => void;
 }
 
-const TeamSquad: React.FC<TeamSquadProps> = ({ teamBadge, teamName }) => {
+const TeamSquad: React.FC<TeamSquadProps> = ({ teamBadge, teamName, onUpdateSelectedPlayers }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showPlayerModal, setShowPlayerModal] = useState(false);
@@ -86,13 +87,14 @@ const TeamSquad: React.FC<TeamSquadProps> = ({ teamBadge, teamName }) => {
       } else {
         return prevPlayers;
       }
-    });
+          });
+          onUpdateSelectedPlayers(selectedPlayers); 
   };
 
   useEffect(() => {
     console.log("Selected Players:", selectedPlayers);
-  }, [selectedPlayers]);
-
+    onUpdateSelectedPlayers(selectedPlayers); 
+}, [selectedPlayers]);
   return (
     <div>
       <h2>Squad for {teamName}</h2>

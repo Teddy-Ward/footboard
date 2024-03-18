@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import fetchTeamData from "utils/fetchTeamData";
 import TeamGrid from "components/teams/TeamGrid";
 import TeamSquad from "components/Squad/TeamSquad";
+import { Player } from "components/Squad/PlayerTypes";
 
 interface TeamData {
   idTeam: string;
@@ -19,6 +20,14 @@ const Main: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [selectedTeam, setSelectedTeam] = useState<Team | null>(null);
+  const [squadPlayers, setSquadPlayers] = useState<Player[]>([]);
+
+  const handleSquadPlayersUpdate = (players: Player[]) => {
+    console.log('Selected Players from TeamSquad:', players); 
+
+    setSquadPlayers(players);
+  };
+
 
   useEffect(() => {
     setIsLoading(true);
@@ -50,6 +59,7 @@ const Main: React.FC = () => {
           <TeamSquad
             teamName={selectedTeam.strTeam}
             teamBadge={selectedTeam.teamBadge}
+            onUpdateSelectedPlayers={handleSquadPlayersUpdate}
           />
           <button onClick={() => handleRemoveSelectedTeam()}>
             Remove Selected Team
