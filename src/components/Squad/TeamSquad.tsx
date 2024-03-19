@@ -39,17 +39,23 @@ const TeamSquad: React.FC<TeamSquadProps> = ({ teamBadge, teamName, onUpdateSele
             (player) =>
               player.strPosition === "Left-Back" ||
               player.strPosition === "Right-Back" ||
-              player.strPosition === "Centre-Back"
+              player.strPosition === "Centre-Back" ||
+              player.strPosition === "Defender"
           );
           const midfielders = data.players.filter(
             (player) =>
-              player.strPosition === "Left Wing" ||
-              player.strPosition === "Right Winger" ||
               player.strPosition === "Defensive Midfield" ||
-              player.strPosition === "Attacking Midfield"
+              player.strPosition === "Central Midfield" ||
+              player.strPosition === "Attacking Midfield" ||
+              player.strPosition === "Right Midfield" || 
+              player.strPosition === "Left Midfield"
           );
           const forwards = data.players.filter(
-            (player) => player.strPosition === "Centre-Forward"
+            (player) => 
+              player.strPosition === "Left Wing" ||
+              player.strPosition === "Right Winger" ||
+              player.strPosition === "Centre-Forward" ||
+              player.strPosition === "Forward"
           );
           setGoalkeepers(goalkeepers);
           setDefenders(defenders);

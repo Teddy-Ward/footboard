@@ -31,9 +31,9 @@ const Pitch: React.FC<PitchProps> = ({ squadPlayers }) => {
       { x: "60%", y: "68%" }, // Midfielder 2
       { x: "40%", y: "68%" }, // Midfielder 3
       { x: "20%", y: "68%" }, // Midfielder 4
-      { x: "65%", y: "55%" }, // Forward 1
+      { x: "70%", y: "55%" }, // Forward 1
       { x: "50%", y: "55%" }, // Forward 2
-      { x: "35%", y: "55%" }, // Forward 3
+      { x: "30%", y: "55%" }, // Forward 3
     ],
   };
   return (
@@ -70,20 +70,21 @@ const Pitch: React.FC<PitchProps> = ({ squadPlayers }) => {
                 alt="Red Circle"
                 className="red-circle"
                 style={{
-                  position: "relative", // Change to relative for text positioning
+                  position: "relative", 
                   transform: `translate(-50%, -50%)`,
                   width: "40px",
                   height: "40px",
                 }}
               />
-              {/* Display strNumber within the circle */}
               <div
+                className="player-number"
                 style={{
                   position: "absolute",
-                  top: "50%",
-                  left: "50%",
+                  top: "0%",
+                  left: "-2%",
                   transform: "translate(-50%, -50%)",
                   color: "white",
+                  cursor: "default",
                 }}
               >
                 {player.strNumber}
