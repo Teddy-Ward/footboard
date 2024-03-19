@@ -32,7 +32,7 @@ const PlayerList: React.FC<PlayerListProps> = ({
                 checked={selectedPlayers.includes(player)}
                 onChange={() => onPlayerSelectionChange(player)}
               />
-               {player.strPlayerAlternate || player.strPlayer} - #{player.strNumber}{" "}
+               {player.strPlayer} - #{player.strNumber}{" "}
               <button
                 className="info-button"
                 onClick={() => handleShow(player)} 
