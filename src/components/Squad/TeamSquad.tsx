@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import fetchSquadData from "utils/fetchSquadData";
 import PlayerModal from "./PlayerModal";
+import PlayerList from "./PlayerList";
 import { Player } from "./PlayerTypes";
 
 interface TeamSquadProps {
@@ -106,8 +107,8 @@ const TeamSquad: React.FC<TeamSquadProps> = ({
     console.log("Selected Players:", selectedPlayers);
     onUpdateSelectedPlayers(selectedPlayers);
     if (shouldClearTeam) {
-      setSelectedPlayers([]); // Clear the selected players array
-      setShouldClearTeam(false); // Reset the clear flag
+      setSelectedPlayers([]);
+      setShouldClearTeam(false);
     }
   }, [selectedPlayers, shouldClearTeam, onUpdateSelectedPlayers]);
   return (
@@ -120,130 +121,42 @@ const TeamSquad: React.FC<TeamSquadProps> = ({
       ) : goalkeepers ? (
         <>
           {manager && <p>Manager: {manager.strPlayer}</p>}
-          <>
-            <h3>Goalkeepers</h3>
-            <ul>
-              {goalkeepers
-                .sort((a, b) => {
-                  const numA = a.strNumber
-                    ? parseInt(a.strNumber, 10)
-                    : Infinity;
-                  const numB = b.strNumber
-                    ? parseInt(b.strNumber, 10)
-                    : Infinity;
-                  return numA - numB;
-                })
-                .map((goalkeeper) => (
-                  <li key={goalkeeper.idPlayer}>
-                    <input
-                      type="checkbox"
-                      checked={selectedPlayers.includes(goalkeeper)}
-                      onChange={() => handlePlayerSelectionChange(goalkeeper)}
-                    />
-                    {goalkeeper.strPlayer} - #{goalkeeper.strNumber}{" "}
-                    <button
-                      className="info-button"
-                      onClick={() => handleShow(goalkeeper)}
-                    >
-                      ?
-                    </button>
-                  </li>
-                ))}
-            </ul>
-          </>
-          <>
-            <h3>Defenders</h3>
-            <ul>
-              {defenders
-                .sort((a, b) => {
-                  const numA = a.strNumber
-                    ? parseInt(a.strNumber, 10)
-                    : Infinity;
-                  const numB = b.strNumber
-                    ? parseInt(b.strNumber, 10)
-                    : Infinity;
-                  return numA - numB;
-                })
-                .map((defenders) => (
-                  <li key={defenders.idPlayer}>
-                    <input
-                      type="checkbox"
-                      checked={selectedPlayers.includes(defenders)}
-                      onChange={() => handlePlayerSelectionChange(defenders)}
-                    />
-                    {defenders.strPlayer} - #{defenders.strNumber}{" "}
-                    <button
-                      className="info-button"
-                      onClick={() => handleShow(defenders)}
-                    >
-                      ?
-                    </button>
-                  </li>
-                ))}
-            </ul>
-          </>
-          <>
-            <h3>Midfielders</h3>
-            <ul>
-              {midfielders
-                .sort((a, b) => {
-                  const numA = a.strNumber
-                    ? parseInt(a.strNumber, 10)
-                    : Infinity;
-                  const numB = b.strNumber
-                    ? parseInt(b.strNumber, 10)
-                    : Infinity;
-                  return numA - numB;
-                })
-                .map((midfielders) => (
-                  <li key={midfielders.idPlayer}>
-                    <input
-                      type="checkbox"
-                      checked={selectedPlayers.includes(midfielders)}
-                      onChange={() => handlePlayerSelectionChange(midfielders)}
-                    />
-                    {midfielders.strPlayer} - #{midfielders.strNumber}{" "}
-                    <button
-                      className="info-button"
-                      onClick={() => handleShow(midfielders)}
-                    >
-                      ?
-                    </button>
-                  </li>
-                ))}
-            </ul>
-          </>
-          <>
-            <h3>Forwards</h3>
-            <ul>
-              {forwards
-                .sort((a, b) => {
-                  const numA = a.strNumber
-                    ? parseInt(a.strNumber, 10)
-                    : Infinity;
-                  const numB = b.strNumber
-                    ? parseInt(b.strNumber, 10)
-                    : Infinity;
-                  return numA - numB;
-                })
-                .map((forwards) => (
-                  <li key={forwards.idPlayer}>
-                    <input
-                      type="checkbox"
-                      checked={selectedPlayers.includes(forwards)}
-                      onChange={() => handlePlayerSelectionChange(forwards)}
-                    />
-                    {forwards.strPlayer} - #{forwards.strNumber}{" "}
-                    <button
-                      className="info-button"
-                      onClick={() => handleShow(forwards)}
-                    >
-                      ?
-                    </button>
-                  </li>
-                ))}
-            </ul>
-          </>
+          {goalkeepers && (
+            <PlayerList
+              title="Goalkeepers"
+              players={goalkeepers}
+              selectedPlayers={selectedPlayers}
+              onPlayerSelectionChange={handlePlayerSelectionChange}
+              handleShow={handleShow}
+            />
+          )}
+          {defenders && (
+            <PlayerList
+              title="Defenders"
+              players={defenders}
+              selectedPlayers={selectedPlayers}
+              onPlayerSelectionChange={handlePlayerSelectionChange}
+              handleShow={handleShow}
+            />
+          )}
+          {midfielders && (
+            <PlayerList
+              title="Midfielders"
+              players={midfielders}
+              selectedPlayers={selectedPlayers}
+              onPlayerSelectionChange={handlePlayerSelectionChange}
+              handleShow={handleShow}
+            />
+          )}
+          {forwards && (
+            <PlayerList
+              title="Forwards"
+              players={forwards}
+              selectedPlayers={selectedPlayers}
+              onPlayerSelectionChange={handlePlayerSelectionChange}
+              handleShow={handleShow}
+            />
+          )}
           <button onClick={() => setShouldClearTeam(true)}>
             Clear Selected Team
           </button>
@@ -255,7 +168,7 @@ const TeamSquad: React.FC<TeamSquadProps> = ({
       <PlayerModal
         show={showPlayerModal}
         onClose={handleClose}
-        player={selectedPlayer!} // Ensure selectedPlayer exists
+        player={selectedPlayer!}
       />
     </div>
   );
