@@ -22,7 +22,6 @@ const TeamSquad: React.FC<TeamSquadProps> = ({
   const [selectedPlayers, setSelectedPlayers] = useState<Player[]>([]);
   const [shouldClearTeam, setShouldClearTeam] = useState(false);
 
-  const [manager, setManager] = useState<Player | null>(null);
   const [goalkeepers, setGoalkeepers] = useState<Player[]>([]);
   const [defenders, setDefenders] = useState<Player[]>([]);
   const [midfielders, setMidfielders] = useState<Player[]>([]);
@@ -35,9 +34,6 @@ const TeamSquad: React.FC<TeamSquadProps> = ({
         const data = await fetchSquadData(teamName);
 
         if (data.players) {
-          const manager = data.players.find(
-            (player) => player.strPosition === "Manager"
-          );
           const goalkeepers = data.players.filter(
             (player) => player.strPosition === "Goalkeeper"
           );
@@ -67,11 +63,6 @@ const TeamSquad: React.FC<TeamSquadProps> = ({
           setDefenders(defenders);
           setMidfielders(midfielders);
           setForwards(forwards);
-          if (manager) {
-            setManager(manager || null);
-          } else {
-            console.log("No manager found in the data.");
-          }
         }
       } catch (error) {
         console.error("Error fetching squad data:", error);
@@ -111,16 +102,16 @@ const TeamSquad: React.FC<TeamSquadProps> = ({
       setShouldClearTeam(false);
     }
   }, [selectedPlayers, shouldClearTeam, onUpdateSelectedPlayers]);
+  console.log(teamBadge);
   return (
     <div className="squad-container">
-      <h2>Squad for {teamName}</h2>
+      <img className="squad-badge" src={teamBadge} alt={teamName + " Logo"} />
       {isLoading ? (
         <p>Loading...</p>
       ) : error ? (
         <p>Error: {error}</p>
       ) : goalkeepers ? (
         <>
-          {manager && <p>Manager: {manager.strPlayer}</p>}
           {goalkeepers && (
             <PlayerList
               title="Goalkeepers"

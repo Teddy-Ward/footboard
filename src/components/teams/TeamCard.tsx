@@ -8,13 +8,13 @@ interface TeamData {
 
 interface TeamCardProps {
   team: TeamData;
-  teamBadge: string; 
+  teamBadge: string;
   onSelect: (teamName: string, teamBadge: string) => void;
 }
 
 const TeamCard: React.FC<TeamCardProps> = ({ team, onSelect }) => {
   const handleClick = () => {
-    onSelect(team.strTeam, team.idTeam);
+    onSelect(team.strTeam, team.strTeamBadge);
   };
 
   return (
