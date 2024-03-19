@@ -53,32 +53,40 @@ const Main: React.FC = () => {
   };
 
   return (
-    <main className="main-content">
-      {selectedTeam ? (
-        <>
-          <div className="pitch-view">
-            <div>
-              <TeamSquad
-                teamName={selectedTeam.strTeam}
-                teamBadge={selectedTeam.teamBadge}
-                onUpdateSelectedPlayers={handleSquadPlayersUpdate}
-              />
-              <button onClick={() => handleRemoveSelectedTeam()}>
-                Remove Selected Team
-              </button>
-            </div>
-            <Pitch squadPlayers={squadPlayers} />
-          </div>
-        </>
-      ) : (
-        <TeamGrid
-          data={data}
-          isLoading={isLoading}
-          error={error}
-          onSelect={handleTeamSelect}
-        />
+    <>
+      <main className="main-content">
+        <div className=" scrollable-container ">
+          {selectedTeam ? (
+            <>
+              <div className="pitch-view">
+                <div>
+                  <TeamSquad
+                    teamName={selectedTeam.strTeam}
+                    teamBadge={selectedTeam.teamBadge}
+                    onUpdateSelectedPlayers={handleSquadPlayersUpdate}
+                  />
+                </div>
+                <Pitch squadPlayers={squadPlayers} />
+              </div>
+            </>
+          ) : (
+            <TeamGrid
+              data={data}
+              isLoading={isLoading}
+              error={error}
+              onSelect={handleTeamSelect}
+            />
+          )}
+        </div>
+      </main>
+      {selectedTeam && (
+        <div className="remove-team">
+          <button onClick={() => handleRemoveSelectedTeam()}>
+            Remove Selected Team
+          </button>
+        </div>
       )}
-    </main>
+    </>
   );
 };
 

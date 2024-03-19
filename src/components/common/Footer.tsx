@@ -16,9 +16,13 @@ const Footer: React.FC<FooterProps> = ({ theme, toggleTheme }) => {
       >
         Design by TedWard
       </a>
-      <button onClick={toggleTheme} className="theme-toggle">
-        Toggle Theme ({theme})
-      </button>
+      <div onClick={toggleTheme} className="theme-toggle">
+    {theme === 'light' ? (
+        <img src={require("../../assets/icons/moon.svg").default} alt="Moon Icon" />
+    ) : (
+        <img src={require("../../assets/icons/sun.svg").default} alt="Sun Icon" />
+    )}
+</div>
     </footer>
   );
 };

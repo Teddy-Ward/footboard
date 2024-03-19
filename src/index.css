@@ -1,7 +1,12 @@
 :root {
-  --light-main-bg: #2bc016;
-  --dark-main-bg: #395e66;
-  --dark-secondary: #32936f;
+  --light-main-bg: #4caf50;
+  --dark-main-bg: #25473c;
+  --dark-secondary: #237255;
+  --dark-grey-bg: grey;
+  --light-grey-bg: #e6e6e6;
+  --button-color: #4caf50;
+  --button-hover: #3e8e41;
+  --button-active: #388e3c;
 }
 
 body {
@@ -95,6 +100,11 @@ body {
   font-size: 0.6rem;
   line-height: 1.2;
   font-weight: 700;
+  width: 40px;
+}
+
+footer img{
+  cursor: pointer;
 }
 
 /* MAIN */
@@ -109,6 +119,8 @@ body {
   background-color: white;
   overflow-y: auto;
   border-radius: 20px;
+  box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.2);
+
 }
 
 .dark-theme .main-content {
@@ -123,6 +135,7 @@ body {
   padding: 20px 10px 15px 10px;
   box-sizing: border-box;
 }
+
 
 /* Custom Scrollbar Styles */
 .scrollable-container::-webkit-scrollbar {
@@ -151,6 +164,61 @@ body {
   border: 3px solid var(--dark-secondary);
 }
 
+button {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+  background-color: var(--button-color);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    background-color: var(--button-hover);
+  }
+
+  &:active {
+    background-color: var(--button-active);
+    transform: translateY(2px);
+  }
+}
+
+select {
+  display: inline-block;
+  padding: 8px 0px 8px 4px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: var(--button-color);
+  color: white;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+  &:hover {
+    background-color: #3e8e41;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.remove-team {
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+}
+
+.remove-team button {
+  background-color: #933d32;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    background-color: #6d2920;
+  }
+}
+
+
 /* TEAM SELECTION */
 .team-card-container {
   display: flex;
@@ -167,7 +235,7 @@ body {
   width: 198px;
   height: 150px;
   margin: 7px;
-  background-color: #e6e6e6;
+  background-color: var(--light-grey-bg);
   cursor: pointer;
 }
 
@@ -206,6 +274,23 @@ body {
 }
 
 /* SQUAD VIEW */
+.squad-container {
+  background-color: var(--light-grey-bg);
+  border-radius: 20px;
+  padding: 5px 20px;
+  position: relative;
+  top: -10px;
+  min-height: 905px;
+  text-align: center;
+}
+
+.squad-container ul {
+  list-style-type: none;
+  position: relative;
+  text-align: left;
+  left: -10px;
+}
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -230,16 +315,15 @@ body {
 }
 
 .info-button {
-  background-color: var(--dark-secondary);
+  background-color: var(--button-color);
   color: #fff;
   border: none;
   padding: 2px 6px;
   border-radius: 20px;
   font-size: 14px;
-}
-
-.info-button:hover {
-  background-color: var(--dark-main-bg);
+  &:hover {
+    background-color: var(--button-hover);
+  }
 }
 
 /* PITCH */
@@ -275,6 +359,15 @@ body {
 
 .pitch-container img {
   width: 100%;
-  max-height: 900px;
-  margin: auto;
+  max-height: 860px;
+  border-radius: 20px;
+}
+
+.pitch-menu {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+  top: -15px;
 }

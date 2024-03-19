@@ -21,7 +21,7 @@ const TeamGrid: React.FC<TeamGridProps> = ({
   onSelect,
 }) => {
   return (
-    <div className="scrollable-container">
+
       <div className="team-card-container">
         {isLoading ? (
           <p>Loading data...</p>
@@ -37,7 +37,7 @@ const TeamGrid: React.FC<TeamGridProps> = ({
             />
           ))
         )}
-      </div>{" "}
+
     </div>
   );
 };

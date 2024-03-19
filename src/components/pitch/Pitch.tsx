@@ -70,23 +70,26 @@ const Pitch: React.FC<PitchProps> = ({ squadPlayers }) => {
 
   return (
     <div className="pitch-container">
-      <select
-        value={selectedFormation}
-        onChange={(e) => setSelectedFormation(e.target.value)}
-      >
-        <option value="4-4-2">4-4-2</option>
-        <option value="3-4-3">3-4-3</option>
-      </select>
-      <button onClick={() => setShowOpposition(!showOpposition)}>
-        {showOpposition ? "Hide Opposition" : "Show Opposition"}
-      </button>
-      <select
-        value={selectedOppFormation}
-        onChange={(e) => setSelectedOppFormation(e.target.value)}
-      >
-        <option value="4-4-2">4-4-2</option>
-        <option value="3-4-3">3-4-3</option>
-      </select>
+      <div className="pitch-menu">
+        <select
+          value={selectedFormation}
+          onChange={(e) => setSelectedFormation(e.target.value)}
+        >
+          <option value="4-4-2">4-4-2</option>
+          <option value="3-4-3">3-4-3</option>
+        </select>
+        <button className="pitch-button" onClick={() => setShowOpposition(!showOpposition)}>
+          {showOpposition ? "Hide Opposition" : "Show Opposition"}
+        </button>
+        <select
+          value={selectedOppFormation}
+          onChange={(e) => setSelectedOppFormation(e.target.value)}
+        >
+          <option value="4-4-2">4-4-2</option>
+          <option value="3-4-3">3-4-3</option>
+        </select>
+      </div>
+
       <img
         src={require("../../assets/images/pitch.svg").default}
         alt="Football Pitch"

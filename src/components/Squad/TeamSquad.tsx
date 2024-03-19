@@ -112,7 +112,7 @@ const TeamSquad: React.FC<TeamSquadProps> = ({
     }
   }, [selectedPlayers, shouldClearTeam, onUpdateSelectedPlayers]);
   return (
-    <div>
+    <div className="squad-container">
       <h2>Squad for {teamName}</h2>
       {isLoading ? (
         <p>Loading...</p>
@@ -158,7 +158,7 @@ const TeamSquad: React.FC<TeamSquadProps> = ({
             />
           )}
           <button onClick={() => setShouldClearTeam(true)}>
-            Clear Selected Team
+            Clear Selected Players
           </button>
         </>
       ) : (
