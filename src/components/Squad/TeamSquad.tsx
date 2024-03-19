@@ -9,12 +9,17 @@ interface TeamSquadProps {
   onUpdateSelectedPlayers: (selectedPlayers: Player[]) => void;
 }
 
-const TeamSquad: React.FC<TeamSquadProps> = ({ teamBadge, teamName, onUpdateSelectedPlayers }) => {
+const TeamSquad: React.FC<TeamSquadProps> = ({
+  teamBadge,
+  teamName,
+  onUpdateSelectedPlayers,
+}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showPlayerModal, setShowPlayerModal] = useState(false);
   const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(null);
   const [selectedPlayers, setSelectedPlayers] = useState<Player[]>([]);
+  const [shouldClearTeam, setShouldClearTeam] = useState(false);
 
   const [manager, setManager] = useState<Player | null>(null);
   const [goalkeepers, setGoalkeepers] = useState<Player[]>([]);
@@ -47,11 +52,11 @@ const TeamSquad: React.FC<TeamSquadProps> = ({ teamBadge, teamName, onUpdateSele
               player.strPosition === "Defensive Midfield" ||
               player.strPosition === "Central Midfield" ||
               player.strPosition === "Attacking Midfield" ||
-              player.strPosition === "Right Midfield" || 
+              player.strPosition === "Right Midfield" ||
               player.strPosition === "Left Midfield"
           );
           const forwards = data.players.filter(
-            (player) => 
+            (player) =>
               player.strPosition === "Left Wing" ||
               player.strPosition === "Right Winger" ||
               player.strPosition === "Centre-Forward" ||
@@ -93,14 +98,18 @@ const TeamSquad: React.FC<TeamSquadProps> = ({ teamBadge, teamName, onUpdateSele
       } else {
         return prevPlayers;
       }
-          });
-          onUpdateSelectedPlayers(selectedPlayers); 
+    });
+    onUpdateSelectedPlayers(selectedPlayers);
   };
 
   useEffect(() => {
     console.log("Selected Players:", selectedPlayers);
-    onUpdateSelectedPlayers(selectedPlayers); 
-}, [selectedPlayers]);
+    onUpdateSelectedPlayers(selectedPlayers);
+    if (shouldClearTeam) {
+      setSelectedPlayers([]); // Clear the selected players array
+      setShouldClearTeam(false); // Reset the clear flag
+    }
+  }, [selectedPlayers, shouldClearTeam, onUpdateSelectedPlayers]);
   return (
     <div>
       <h2>Squad for {teamName}</h2>
@@ -235,6 +244,9 @@ const TeamSquad: React.FC<TeamSquadProps> = ({ teamBadge, teamName, onUpdateSele
                 ))}
             </ul>
           </>
+          <button onClick={() => setShouldClearTeam(true)}>
+            Clear Selected Team
+          </button>
         </>
       ) : (
         <p>No squad data found.</p>
